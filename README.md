@@ -4,6 +4,7 @@ Portal is a simple subject management tool written using MVC3 with Razor syntax,
 The datastorage is done in a simple text file with the data being serialized json. 
 All events (the few that there are) are handled through simple ajax calls. With a small dataset such as this it's quite fast.
 I didn't give to much thought to security in the design, as was mentioned in the reequirements.
+Note: Developed in Firefox 8.0.1, but IE8 and chrome looked fine. 
 
 Have Fun!!!
 
