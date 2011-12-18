@@ -1,0 +1,58 @@
+﻿@model IndexModel
+@{
+    ViewBag.Title = "Home Page";
+}
+@section HeaderScripts {
+    <script src="@Url.Content("~/Scripts/Index.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.8.11.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.tmpl.js")" type="text/javascript"></script>
+
+    <script id="buttonTemplate" type="text/x-jquery-tmpl">
+        <div class="removeBtn"><a href="#" class="removeActionBtn"><img alt="delete" src="@Url.Content("/Content/deletebtn.png")"></img></a></div>
+    </script>
+}
+<img alt="" id="out_img" src="@Url.Content("/Content/out.png")" />
+<div id="ajaxHtmlContainer">
+    @Html.Partial("SubjectTable", Model)
+</div>
+
+<img alt="" id="in_img" src="@Url.Content("/Content/in.png")" />
+
+<div id="addSubject">
+    <div id="tablelessForm">
+        <div id="innerContent">
+            <div>
+                <div class="addSubjectText">
+                    First Name:</div>
+                <input type="text" value="e.g. Kaiser" class="addInput" id="firstname_input" /><div
+                    class="checkHolder" id="firstname_check">
+                    <img alt="" class="check" id="" src="@Url.Content("/Content/check.gif")" /></div>
+            </div>
+            <div>
+                <div class="addSubjectText">
+                    Last Name:</div>
+                <input type="text" value="e.g. Sousa" class="addInput" id="lastname_input" /><div
+                    class="checkHolder" id="lastname_check">
+                    <img alt="" id="" class="check" src="@Url.Content("/Content/check.gif")" /></div>
+            </div>
+            <div>
+                <div class="addSubjectText">
+                    Email:</div>
+                <input type="text" value="e.g. Kaiser@@whoAmI.com" class="addInput" id="email_input" /><div
+                    class="checkHolder" id="email_check">
+                    <img alt="" class="check" id="" src="@Url.Content("/Content/check.gif")" /></div>
+                <span id="uniqueText">Sorry, that email is taken.</span></div>
+            <div>
+                <div class="addSubjectText">
+                    Password:</div>
+                <input type="text" value="e.g. 1234567" class="addInput" id="pw_input" /><div class="checkHolder"
+                    id="pw_check">
+                    <img alt="" id="" class="check" src="@Url.Content("/Content/check.gif")" /></div>
+            </div>
+            <a href="#" id="close_add">Close</a> <span id="requiredText">All Fields Required</span>
+            <div id="addButton">
+                <a id="addButtonLink" href="#" id="add_subject_btn">Add</a>
+            </div>
+        </div>
+    </div>
+</div>

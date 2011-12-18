@@ -1,0 +1,62 @@
+﻿@model IndexModel
+@{
+    Layout = null;
+}
+<div id="innerContent">  
+    <img alt="" id="add_img" src="@Url.Content("/Content/add.png")" />
+    <div id="tableFooter"></div>  
+    <table id="subjectTable">
+        <tr class="tableDark borderless center">
+            <td>
+            <a href="#" class="sort" type="FirstName">First Name</a>
+            </td>
+            <td>
+            <a href="#" class="sort" type="LastName">Last Name</a>
+            </td>
+            <td>
+            <a href="#" class="sort" type="Email">Email</a>
+            </td>
+            <td>
+            <a href="#" class="sort" type="Password">Password</a>
+            </td>
+        </tr>
+        @foreach(Portal.Business.TestSubject subject in Model.Response.Subjects)
+        {
+        <tr>
+            <td>
+                @subject.FirstName
+            </td>
+            <td>
+                @subject.LastName
+            </td>
+            <td>
+                <a class="email" href="mailto:@subject.Email">@subject.Email</a>
+            </td>
+            <td>
+                @subject.Password
+            </td>
+        </tr>      
+        }   
+        <tr class="tableDark borderless center">
+            <td align="left">
+                <a href="#" class="pager" type="back">< previous</a>
+            </td>
+            <td align="center" style="background-color:#FFFFFF; color:#333333;" colspan="2">
+                Page <span id="currentPageNumber">@(Model.PageOptions.PageNumber + 1)</span> of @TotalPages()
+            </td>
+            <td align="right">
+                <a href="#" class="pager" type="next">next ></a>
+            </td>
+        </tr>
+    </table>
+</div>  
+<div id="personSuccessIndicator"><span></span></div>
+
+<input type="hidden" id="sortByValue" value="@Model.PageOptions.SortBy" />
+
+@helper TotalPages() {
+    int pages = (Model.Response.Total / 5);
+    if ((Model.Response.Total % 5) > 0) { pages++; }
+     
+    <span id="totalPages">@pages</span>
+}
