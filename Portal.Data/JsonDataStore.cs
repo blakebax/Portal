@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Portal.Business;
 using System.IO;
 using Newtonsoft.Json;
+using System.Web;
 
 namespace Portal.Data
 {
@@ -18,6 +19,19 @@ namespace Portal.Data
         // solution, like a database instead of in-memory
         private static List<TestSubject> datastore = null;
 
+    	// Path to the datastore
+		private string storePath
+		{
+			get
+			{
+				if (HttpContext.Current != null)
+				{
+					return HttpContext.Current.Server.MapPath(HttpContext.Current.Request.ApplicationPath) + "..\\Portal.Data\\datastore.txt";
+				} 
+				else return "datastore.txt"; // For unit testing
+			}
+		}
+
         /// <summary>
         /// The default .ctor
         /// </summary>
@@ -25,7 +39,7 @@ namespace Portal.Data
         {
             if (datastore == null)
             {
-                string textData = File.ReadAllText("datastore.txt");
+				string textData = File.ReadAllText(storePath);
                 if (!string.IsNullOrEmpty(textData))
                 {
                     datastore = JsonConvert.DeserializeObject<List<TestSubject>>(textData);
@@ -103,7 +117,7 @@ namespace Portal.Data
         /// </summary>
         private void Flush()
         {
-            File.WriteAllText("datastore.txt", JsonConvert.SerializeObject(datastore));
+			File.WriteAllText(storePath, JsonConvert.SerializeObject(datastore));
         }
     }
 }
